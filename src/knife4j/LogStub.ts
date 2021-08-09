@@ -1,15 +1,17 @@
 export default class LogStub {
-  log(msg: any) {
+  log (msg: any) {
     if (window.console) {
       window.console.log(msg)
     }
   }
-  error(msg: any) {
+
+  error (msg: any) {
     if (window.console) {
       window.console.error(msg)
     }
   }
-  warn(msg: any) {
+
+  warn (msg: any) {
     if (window.console) {
       window.console.warn(msg)
     }

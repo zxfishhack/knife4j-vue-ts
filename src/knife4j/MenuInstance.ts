@@ -1,6 +1,6 @@
 import ld from 'lodash'
-import md5 from "js-md5"
-import SwaggerApi from "@/knife4j/SwaggerApi"
+import md5 from 'js-md5'
+import SwaggerApi from '@/knife4j/SwaggerApi'
 import KUtils from '@/core/utils'
 export default class MenuInstance {
   groupName = ''
@@ -19,7 +19,7 @@ export default class MenuInstance {
   authority?:string
 }
 
-export function HomePage(groupName: string, groupId: string, name: string) {
+export function HomePage (groupName: string, groupId: string, name: string) {
   const inst = new MenuInstance()
   ld.merge(inst, {
     groupName: groupName,
@@ -27,7 +27,7 @@ export function HomePage(groupName: string, groupId: string, name: string) {
     key: 'kmain',
     /* name: '主页', */
     name: name,
-    i18n:'home',
+    i18n: 'home',
     component: 'Main',
     icon: 'icon-home',
     path: 'home'
@@ -36,7 +36,7 @@ export function HomePage(groupName: string, groupId: string, name: string) {
   return inst
 }
 
-export function GlobalParam(groupName: string, groupId: string) {
+export function GlobalParam (groupName: string, groupId: string) {
   const inst = new MenuInstance()
   ld.merge(inst, {
     groupName: groupName,
@@ -46,37 +46,37 @@ export function GlobalParam(groupName: string, groupId: string) {
     tabName: 'Authorize(' + groupName + ')',
     component: 'Authorize',
     icon: 'icon-authenticationsystem',
-    path: 'Authorize/' + groupName,
+    path: 'Authorize/' + groupName
   })
 
   return inst
 }
 
-export function SwaggerModel(groupName: string, groupId: string, swaggerModelName: string) {
+export function SwaggerModel (groupName: string, groupId: string, swaggerModelName: string) {
   const inst = new MenuInstance()
   ld.merge(inst, {
     groupName: groupName,
     groupId: groupId,
     key: 'swaggerModel' + md5(groupName),
-    //name: 'Swagger Models',
-    name:swaggerModelName,
+    // name: 'Swagger Models',
+    name: swaggerModelName,
     component: 'SwaggerModels',
-    tabName: swaggerModelName+'('+groupName+')',
+    tabName: swaggerModelName + '(' + groupName + ')',
     icon: 'icon-modeling',
-    path: 'SwaggerModels/' + groupName,
+    path: 'SwaggerModels/' + groupName
   })
   return inst
 }
 
-export function DocumentManage(groupName: string, groupId: string, menu: any) {
+export function DocumentManage (groupName: string, groupId: string, menu: any) {
   const inst = new MenuInstance()
   ld.merge(inst, {
     groupName: groupName,
     groupId: groupId,
     key: 'documentManager' + md5(groupName),
-    i18n:'manager',
+    i18n: 'manager',
     /* name: '文档管理', */
-    name: menu.manager, //inst.getI18n().menu.manager
+    name: menu.manager, // inst.getI18n().menu.manager
     icon: 'icon-zdlxb',
     path: 'documentManager'
   })
@@ -88,8 +88,8 @@ export function DocumentManage(groupName: string, groupId: string, menu: any) {
     /*  name: '全局参数设置',
       tabName: '全局参数设置(' + groupName + ')', */
     name: menu.globalsettings,
-    i18n:'globalsettings',
-    tabName: menu.globalsettings+'(' + groupName + ')',
+    i18n: 'globalsettings',
+    tabName: menu.globalsettings + '(' + groupName + ')',
     component: 'GlobalParameters',
     path: 'GlobalParameters-' + groupName
   })
@@ -102,8 +102,8 @@ export function DocumentManage(groupName: string, groupId: string, menu: any) {
     /*  name: '离线文档',
       tabName: '离线文档(' + groupName + ')', */
     name: menu.officeline,
-    i18n:'officeline',
-    tabName: menu.officeline+'(' + groupName + ')',
+    i18n: 'officeline',
+    tabName: menu.officeline + '(' + groupName + ')',
     component: 'OfficelineDocument',
     path: 'OfficelineDocument-' + groupName
   })
@@ -115,7 +115,7 @@ export function DocumentManage(groupName: string, groupId: string, menu: any) {
     key: 'Settings' + md5(groupName),
     /* name: '个性化设置', */
     name: menu.selfSettings,
-    i18n:'selfSettings',
+    i18n: 'selfSettings',
     component: 'Settings',
     path: 'Settings'
   })
@@ -124,7 +124,7 @@ export function DocumentManage(groupName: string, groupId: string, menu: any) {
   return inst
 }
 
-export function TagMenu(groupName: string, groupId: string, name: string) {
+export function TagMenu (groupName: string, groupId: string, name: string) {
   const inst = new MenuInstance()
   ld.merge(inst, {
     groupName: groupName,
@@ -132,15 +132,15 @@ export function TagMenu(groupName: string, groupId: string, name: string) {
     key: md5(name),
     name: name,
     icon: 'icon-APIwendang',
-    //path: groupName + "/" + tag.name
-    //不存在接口,直接指向home主页
-    path:""
+    // path: groupName + "/" + tag.name
+    // 不存在接口,直接指向home主页
+    path: ''
   })
 
   return inst
 }
 
-export function TagSubMenu(groupName: string, groupId: string, tag: SwaggerApi) {
+export function TagSubMenu (groupName: string, groupId: string, tag: SwaggerApi) {
   const inst = new MenuInstance()
   ld.merge(inst, {
     groupName: groupName,
@@ -152,7 +152,7 @@ export function TagSubMenu(groupName: string, groupId: string, tag: SwaggerApi) 
     component: 'ApiInfo',
     hasNew: tag.hasNew || tag.hasChanged,
     deprecated: tag.deprecated,
-    //用于搜索
+    // 用于搜索
     url: tag.url,
     method: tag.methodType.toUpperCase(),
     menuClass: 'knife4j-menu-left-style'

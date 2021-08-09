@@ -1,4 +1,4 @@
-import SwaggerApi from "@/knife4j/SwaggerApi";
+import SwaggerApi from '@/knife4j/SwaggerApi'
 
 export default class SwaggerTag {
   name = ''

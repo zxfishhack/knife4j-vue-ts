@@ -1,4 +1,4 @@
-import ModelData from "@/types/ModelData"
+import ModelData from '@/types/ModelData'
 
 export default class ModelInfo {
   id = ''

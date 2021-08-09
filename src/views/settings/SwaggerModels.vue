@@ -32,6 +32,7 @@ import Constants from '@/store/constants'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { LocaleMessage } from 'vue-i18n'
 import ModelInfo from '@/types/ModelInfo'
+import ModelData from '@/types/ModelData'
 
 @Component
 export default class SwaggerModels extends Vue {
@@ -66,7 +67,7 @@ export default class SwaggerModels extends Vue {
   }
 
   initI18n () {
-    this.columns = this.getCurrentI18nInstance().table.swaggerModelsColumns
+    this.columns = (this.getCurrentI18nInstance() as any).table.swaggerModelsColumns
   }
 
   unionKey () {
@@ -81,13 +82,12 @@ export default class SwaggerModels extends Vue {
     if (KUtils.checkUndefined(treeTableModel)) {
       for (var name in treeTableModel) {
         var random = Math.floor(Math.random() * (6 - 1 + 1) + 1)
-        this.modelNames.push(new ModelInfo(id, name, random))
+        this.modelNames.push(new ModelInfo(name, name, random))
       }
     }
   }
 
   modelChange (key: any[]) {
-    var that = this
     // console("当前激活面板key:" + that.activeKey);
 
     var instanceKey =
@@ -101,22 +101,22 @@ export default class SwaggerModels extends Vue {
       var id = key[lastIndex]
       // console("key------------");
       this.modelNames.forEach(model => {
-        if (model.id == id) {
+        if (model.id === id) {
           // console("找到匹配的model了===");
           // 找到该model,判断是否已加载
           if (!model.load) {
             // 未加载的情况下,进行查找数据
             /// /console("查找属性");
             /// /console(model);
-            const modelData = []
+            const modelData:ModelData[] = []
             // 得到当前model的原始对象
             // 所有丶属性全部深拷贝,pid设置为-1
             // var originalModel = treeTableModel[model.name];
-            var originalModel = that.$Knife4jModels.getByModelName(
+            var originalModel = this.$Knife4jModels.getByModelName(
               instanceKey,
               model.name
             )
-            originalModel = that.swagger.analysisDefinitionRefTableModel(that.data.instance.id, originalModel)
+            originalModel = this.swagger.analysisDefinitionRefTableModel(this.data.instance.id, originalModel)
             // console.log("初始化完成")
             // console.log(originalModel);
             // console("查找原始model:" + model.name);
@@ -124,7 +124,7 @@ export default class SwaggerModels extends Vue {
               // 存在
               // 查找属性集合
               if (KUtils.arrNotEmpty(originalModel.params)) {
-                originalModel.params.forEach(function (nmd) {
+                originalModel.params.forEach(function (nmd:any) {
                   // 第一层属性的pid=-1
                   var childrenParam = {
                     children: nmd.children,
@@ -164,7 +164,7 @@ export default class SwaggerModels extends Vue {
       })
     }
     // 第二次复制
-    that.expanRows = true
+    this.expanRows = true
   }
 }
 

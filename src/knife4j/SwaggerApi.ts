@@ -7,5 +7,4 @@ export default class SwaggerApi {
   deprecated = false
   url = ''
   methodType = 'POST'
-
 }
