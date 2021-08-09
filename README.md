@@ -1,4 +1,4 @@
-# knife4j-vue
+# knife4j-vue-ts
 
 ## Project setup
 ```
